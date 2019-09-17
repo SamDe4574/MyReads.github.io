@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class BookCard extends React.Component {
     static propTypes = {
-        bookCard: PropTypes.array.isRequired,
+        bookCard: PropTypes.object.isRequired,
         moveToShelf: PropTypes.func.isRequired,
     }
 
