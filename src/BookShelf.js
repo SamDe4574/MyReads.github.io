@@ -1,6 +1,8 @@
 import React, { Compnent } from 'react';
 import PropTypes from 'prop-types';
 import BookCard from './BookCard';
+import { Link } from 'react-router-dom';
+
 
 
 class BookShelf extends React.Component {
@@ -8,9 +10,7 @@ class BookShelf extends React.Component {
         books: PropTypes.array.isRequired,
         moveToShelf: PropTypes.func.isRequired,
     }
-    state = {
-        value: 'select'
-    }
+
 
     render() {
         const { books, moveToShelf } = this.props
@@ -18,7 +18,6 @@ class BookShelf extends React.Component {
         const shelfeNames = ["Currently Reading", "Want To Read", "Read"]
 
         return (
-
             shelfes.map((shelf, index) => (
                 <div className="bookshelf" key={index} >
                     <h2 className="bookshelf-title">{shelfeNames[index]}</h2>
@@ -37,10 +36,9 @@ class BookShelf extends React.Component {
                 </div>
             ))
 
-
         )
 
     }
 }
 
-export default BookShelf 
+export default BookShelf
