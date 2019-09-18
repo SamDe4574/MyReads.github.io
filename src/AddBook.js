@@ -21,18 +21,16 @@ searchQuery(query) {
 
   BooksAPI.search(query).then((results) => {
     if (results instanceof Array) {
-    const books = results.map((book) => {
-      return {
-        id: book.id,
-        shelf: book.shelf,
-        authors: book.authors,
-        title: book.title,
-        imageLinks: {
-          thumbnail: book.imageLinks.thumbnail
-        }
-      }
-    })
-    this.setState({ books: books })
+      results.forEach( results => {
+        results.shelf = 'none'
+        this.state.books.map( (bookInLibrary) => {
+          if (bookInLibrary.id === results.id) {
+            results.shelf = bookInLibrary.shelf
+          }
+          return results
+        })
+      })
+    this.setState({ books: results })
 
   }  else {
             this.setState({ books: []})
@@ -66,9 +64,25 @@ searchQuery(query) {
                       {books
                           .map((book) => (
                               <li key={book.id}>
+                                {book.imageLinks ?(
                                   <BookCard
                                       bookCard={book}
-                                      moveToShelf={moveToShelf} />
+                                      moveToShelf={moveToShelf}
+                                      shelf={ book.shelf }
+                                      authors={ book.authors }
+                                      title={ book.title }
+                                      imageLinks={ book.imageLinks.thumbnail }
+                                      />
+                                    ) : (
+                                      <BookCard
+                                          bookCard={book}
+                                          moveToShelf={moveToShelf}
+                                          shelf={ book.shelf }
+                                          authors={ book.authors }
+                                          title={ book.title }
+                                          />
+                                      )}
+
                               </li>
                           ))}
                   </ol>
