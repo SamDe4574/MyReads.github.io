@@ -1,7 +1,6 @@
-import React, { Compnent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import BookCard from './BookCard';
-import { Link } from 'react-router-dom';
 
 
 
@@ -26,22 +25,22 @@ class BookShelf extends React.Component {
                             {books.filter(book => book.shelf === shelf)
                                 .map((book) => (
                                     <li key={book.id}>
-                                      {book.imageLinks ?(
-                                        <BookCard
-                                            bookCard={book}
-                                            moveToShelf={moveToShelf}
-                                            shelf={ book.shelf }
-                                            authors={ book.authors }
-                                            title={ book.title }
-                                            imageLinks={ book.imageLinks.thumbnail }
-                                            />
-                                          ) : (
+                                        {book.imageLinks ? (
                                             <BookCard
                                                 bookCard={book}
                                                 moveToShelf={moveToShelf}
-                                                shelf={ book.shelf }
-                                                authors={ book.authors }
-                                                title={ book.title }
+                                                shelf={book.shelf}
+                                                authors={book.authors}
+                                                title={book.title}
+                                                imageLinks={book.imageLinks.thumbnail}
+                                            />
+                                        ) : (
+                                                <BookCard
+                                                    bookCard={book}
+                                                    moveToShelf={moveToShelf}
+                                                    shelf={book.shelf}
+                                                    authors={book.authors}
+                                                    title={book.title}
                                                 />
                                             )}
                                     </li>

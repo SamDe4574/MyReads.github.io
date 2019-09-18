@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 
@@ -13,12 +13,12 @@ class BookCard extends React.Component {
     }
 
     render() {
-        const { bookCard,authors,title,imageLinks } = this.props
-        if(bookCard.shelf == null) {bookCard.shelf = 'none'}
+        const { bookCard, authors, title, imageLinks } = this.props
+        if (bookCard.shelf == null) { bookCard.shelf = 'none' }
         return (
             <div className="book">
                 <div className="book-top">
-                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks})` }}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks})` }}></div>
                     <div className="book-shelf-changer">
                         <select value={bookCard.shelf} onChange={(e) => this.update(e.target.value)}>
                             <option value="move" disabled>{bookCard.shelf}</option>
