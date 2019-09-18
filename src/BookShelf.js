@@ -17,8 +17,8 @@ class BookShelf extends React.Component {
         const shelfeNames = ["Currently Reading", "Want To Read", "Read"]
 
         return (
-            shelfes.map((shelf, index) => (
-                <div className="bookshelf" key={index} >
+            shelfes.map((shelf,index) => (
+                <div className="bookshelf" key={shelf} >
                     <h2 className="bookshelf-title">{shelfeNames[index]}</h2>
                     <div className="bookshelf-books">
                         <ol className="books-grid">
@@ -41,6 +41,7 @@ class BookShelf extends React.Component {
                                                     shelf={book.shelf}
                                                     authors={book.authors}
                                                     title={book.title}
+                                                    imageLinks='http://via.placeholder.com/128x193?text=No%20Cover'
                                                 />
                                             )}
                                     </li>

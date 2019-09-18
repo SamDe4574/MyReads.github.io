@@ -21,7 +21,7 @@ class BookCard extends React.Component {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks})` }}></div>
                     <div className="book-shelf-changer">
                         <select value={bookCard.shelf} onChange={(e) => this.update(e.target.value)}>
-                            <option value="move" disabled>{bookCard.shelf}</option>
+                            <option value="move" disabled>Move To ...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
                             <option value="read">Read</option>
@@ -30,7 +30,7 @@ class BookCard extends React.Component {
                     </div>
                 </div>
                 <div className="book-title">{title}</div>
-                <div className="book-authors">{authors}</div>
+                <div className="book-authors">{authors && authors.join(', ')}</div>
             </div>
         )
     }

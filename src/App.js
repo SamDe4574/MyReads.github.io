@@ -3,9 +3,10 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Bookshelf from './BookShelf';
 import Header from './Header';
-import AddBook from './AddBook';
+import Search from './Search';
+import PageNotFound from './PageNotFound';
 
-import { Route, Link } from 'react-router-dom';
+import { Switch,Route, Link } from 'react-router-dom';
 
 
 class BooksApp extends React.Component {
@@ -32,6 +33,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+        <Switch>
         <Route exact path='/' render={() => (
           <div className='list-books'>
             <Header />
@@ -41,17 +43,21 @@ class BooksApp extends React.Component {
             />
             <div className="open-search">
               <Link
-                to='/addBook'
+                to='/search'
               >add a book</Link>
             </div>
           </div>
 
         )} />
-        <Route exact path='/addBook' render={() => (
-          <AddBook
+      <Route exact path='/search' render={() => (
+          <Search
+            books = {this.state.books}
             moveToShelf={this.moveToShelf}
           />
         )} />
+        <Route path="*" component={PageNotFound} />
+
+      </Switch>
       </div>
 
     )

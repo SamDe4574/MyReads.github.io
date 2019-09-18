@@ -5,14 +5,15 @@ import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom';
 
 
-class AddBook extends React.Component {
+class Search extends React.Component {
   static propTypes = {
+    books: PropTypes.array.isRequired,
     moveToShelf: PropTypes.func.isRequired,
   }
 
   state = {
     query: '',
-    books: []
+    Searchedbooks: []
   }
 
   searchQuery(query) {
@@ -21,25 +22,25 @@ class AddBook extends React.Component {
 
     BooksAPI.search(query).then((results) => {
       if (results instanceof Array) {
-        results.forEach(results => {
-          results.shelf = 'none'
-          this.state.books.map((bookInLibrary) => {
-            if (bookInLibrary.id === results.id) {
-              results.shelf = bookInLibrary.shelf
+        results.forEach(result => {
+          result.shelf = 'none'
+          this.props.books.map((bookInLibrary) => {
+            if (bookInLibrary.id === result.id) {
+              result.shelf = bookInLibrary.shelf
             }
-            return results
+            return result
           })
         })
-        this.setState({ books: results })
+        this.setState({ Searchedbooks: results })
 
       } else {
-        this.setState({ books: [] })
+        this.setState({ Searchedbooks: [] })
       }
     })
   }
   render() {
     const { moveToShelf } = this.props
-    const { books, query } = this.state
+    const { Searchedbooks, query } = this.state
 
 
     return (
@@ -60,7 +61,7 @@ class AddBook extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {books
+            {Searchedbooks
               .map((book) => (
                 <li key={book.id}>
                   {book.imageLinks ? (
@@ -79,13 +80,14 @@ class AddBook extends React.Component {
                         shelf={book.shelf}
                         authors={book.authors}
                         title={book.title}
+                        imageLinks='http://via.placeholder.com/128x193?text=No%20Cover'
                       />
                     )}
 
                 </li>
               ))}
           </ol>
-          {query.length > 1 && books.length === 0 && (
+          {query.length > 1 && Searchedbooks.length === 0 && (
             <div className="search-error">
               <h4>Sorry </h4>
               <p>No book matches your search.</p>
@@ -97,4 +99,4 @@ class AddBook extends React.Component {
   }
 }
 
-export default AddBook
+export default Search
